@@ -32,7 +32,7 @@ from example.views import (
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('hello/', hello_world),
+    path('hello/', hello_world, name="hello_world"),
     path('hello/<str:name>/', hello_name),
     path('index.html', hello_world_template),
     path('list.html', simple_list_view),

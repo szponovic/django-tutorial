@@ -9,10 +9,7 @@ from django.views.generic.edit import UpdateView
 from django.http import HttpResponse
 
 def hello_world(request):
-    return HttpResponse('Byłem w Ryjo, byłem w Bajo, miałem bilet na Hawajo \n'
-                        '\tByłem na wsi, byłem w mieście, byłem nawet w Budapeszcie\n'
-                        'Wszystko chuj, o ja wam mówię wszystko chuj\n'
-                        'O może czasem trochę mniejszy, ale potem jeszcze większy')
+    return HttpResponse("Hello World!")
 
 def hello_name(request, name):
     return HttpResponse(f'hello {name}!')
