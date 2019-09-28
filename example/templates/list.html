@@ -1,0 +1,19 @@
+{% load bootstrap3 %}
+{% bootstrap_css %}
+
+{% extends 'index.html' %}
+{% block content %}
+<div class="panel panel-default">
+    <div class="panel-heading">List of Movies</div>
+    <div class="panel-heading">Ilosc filmow {{movies|length}}</div>
+
+    <div class="panel-body">
+        <ul>
+            {% for movie in movies %}
+            <li>{{ movie.name|upper }}</li>
+            <li>{{ movie.created_on|date:'Y-m-d' }}</li>
+            {% endfor %}
+        </ul>
+    </div>
+</div>
+{% endblock %}
