@@ -1,19 +1,39 @@
+{% extends 'index.html' %}
 {% load bootstrap3 %}
 {% bootstrap_css %}
 
-{% extends 'index.html' %}
+
 {% block content %}
 <div class="panel panel-default">
     <div class="panel-heading">List of Movies</div>
-    <div class="panel-heading">Ilosc filmow {{movies|length}}</div>
+    <div class="panel-heading">ilosc filmow: {{movies|length}}</div>
 
     <div class="panel-body">
         <ul>
             {% for movie in movies %}
-            <li>{{ movie.name|upper }}</li>
-            <li>{{ movie.created_on|date:'Y-m-d' }}</li>
+            <li>
+                {{ movie.name|title }}
+                {{ movie.id}}
+                <a href="{% url 'movie_edit' pk=movie.id %}"><b>Edit</b></a>
+                <a href="{% url 'delete' pk=movie.id %}"><b>Delete</b></a>
+            </li>
             {% endfor %}
         </ul>
+
     </div>
+
+    <div class="panel-body">
+        <ul>
+            {% for genre in genres %}
+            <li>
+                {{ genre.name|title }}
+                <a href="{% url 'genre_edit' pk=genre.id %}"><b>Edit</b></a>
+                <a href="{% url 'delete' pk=genre.id %}"><b>Delete</b></a>
+            </li>
+            {% endfor %}
+        </ul>
+
+    </div>
+
 </div>
 {% endblock %}
