@@ -1,4 +1,5 @@
 venv/
+django-project
 __pycache__/
 *.py[cod]
 
