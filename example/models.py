@@ -13,6 +13,9 @@ class Movie(models.Model):
     created_on = models.DateTimeField(auto_now_add=True)
     #rating = models.FloatField(default=0)
     genre = models.ForeignKey(Genre, on_delete=models.DO_NOTHING)
+    about = models.CharField(max_length=1280, default="")
+    viewed = models.BooleanField(default=False)
+    is_deleted = models.BooleanField(default=False)
 
     def __str__(self):
         return self.name

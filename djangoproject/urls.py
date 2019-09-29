@@ -15,20 +15,34 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from django.conf.urls import include, url
+from rest_framework import routers
+from rest_framework.authtoken import views
 
 from example.views import hello_world
 from example.views import hello_name
 from example.views import (
     hello_world_template,
     simple_list_view,
-    MovieListViev,
-    GenreListViev,
+    MovieListView,
+    GenreListView,
     PostCreateView,
     PostEditView,
     GenreCreateViev,
-    GenreEditViev,
-    PostDeleteViev,
+    GenreEditView,
+    PostDeleteView,
+    MovieViewSet,
+    GenreViewSet
 )
+
+
+router = routers.DefaultRouter()
+router.register(r"genres", GenreViewSet)
+router.register(r"movies", MovieViewSet)
+
+
+
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -36,11 +50,15 @@ urlpatterns = [
     path('hello/<str:name>/', hello_name),
     path('index.html', hello_world_template),
     path('list.html', simple_list_view),
-    path('movie_list_by_class_view/', MovieListViev.as_view(), name="movie_list"),
-    path('genre_list_by_class_view/', GenreListViev.as_view(), name="genre_list"),
+    path('movie_list_by_class_view/', MovieListView.as_view(), name="movie_list"),
+    path('genre_list_by_class_view/', GenreListView.as_view(), name="genre_list"),
     path('movie/add/', PostCreateView.as_view(), name="movie_add"),
     path('movie/edit/<int:pk>/', PostEditView.as_view(), name="movie_edit"),
     path('genre/add', GenreCreateViev.as_view(), name="genre_add"),
-    path('genre/edit/<int:pk>/', GenreEditViev.as_view(), name="genre_edit"),
-    path('movie/delete/<int:pk>/', PostDeleteViev.as_view(), name="delete"),
+    path('genre/edit/<int:pk>/', GenreEditView.as_view(), name="genre_edit"),
+    path('movie/delete/<int:pk>/', PostDeleteView.as_view(), name="delete"),
+    path('api-auth/', include('rest_framework.urls')),
+    path('', include(router.urls)),
+    path('api-token-auth/', views.obtain_auth_token),
+
 ]
